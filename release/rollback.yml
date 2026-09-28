@@ -1,2 +1,2 @@
-rollback_strategy: 
-target_version: 
+rollback_strategy: moving_to_previous_version
+target_version: v2.2.0
