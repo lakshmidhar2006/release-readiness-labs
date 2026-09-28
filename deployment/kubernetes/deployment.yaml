@@ -1,5 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
+Infrastructure : Kubernetes
 metadata:
   name: lab-app
 spec:
@@ -14,11 +15,19 @@ spec:
     spec:
       containers:
       - name: lab-app
-        image: lab-app:production-build
+        image: lab-app:v2.3.0
         ports:
         - containerPort: 3000
         env:
         - name: API_KEY
-          value: "test-api-key-1234"
+          valueFrom:
+            secretKeyRef:
+              name: lab-app-secrets
+              key: API_KEY
+
+         
         - name: DATABASE_PASSWORD
-          value: "password123"
+          valueFrom:
+            secretKeyRef:
+              name: lab-app-secrets
+              key: DATABASE_PASSWORD
